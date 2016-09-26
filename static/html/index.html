@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>hello world</title>
+  </head>
+  <body>
+    <div id="app">
+      Hello {{name}}
+    </div>
+
+
+
+    <script src="../lib/vue.js"></script>
+    <script type="text/javascript">
+      var data = {
+        name: "vue.js"
+      }
+      new Vue({
+        el: '#app',
+        data: {
+          newTodo: '',
+          todos: [
+            { text: 'Add some todos' }
+          ]
+        },
+        methods: {
+          addTodo: function(){
+            var text = this.newTodo.trim()
+            if(text){
+              this.todos.push({text: text})
+              this.newTodo = ''
+            }
+          },
+          removeTodo: function(index){
+            this.todos.splice(index, 1);
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
