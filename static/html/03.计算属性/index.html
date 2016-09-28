@@ -21,8 +21,14 @@
       </p>
       <p>
       性别：
-      <input type="radio" name="sex" value="male">男
-      <input type="radio" name="sex" value="female">女
+      <select v-model="sex">
+        <option value="男">男</option>
+        <option value="女">女</option>
+      </select>
+      <!-- <input type="radio" id="male" name="sex" value="male">
+      <label for="male">男</label>
+      <input type="radio" id="female" name="sex" value="female">女
+      <label for="female">女</label> -->
       </p>
       <p>
       更多信息：<br/>
@@ -67,12 +73,6 @@
             this.firstName = names[0];
             this.lastName = names[names.length - 1];
           }
-        },
-        isMale: function(){
-          return this.sex === "男";
-        },
-        isFemale: function(){
-          return this.sex === "女";
         }
       }
     })

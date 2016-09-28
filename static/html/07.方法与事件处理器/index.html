@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>方法与事件处理器</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" placeholder="大声喊出来~~~" @keyup.enter="addMySpeak(mySpeak, $event)" v-model="mySpeak">
+    </div>
+    <script src="../../lib/vue.js"></script>
+    <script type="text/javascript">
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          mySpeak: ''
+        },
+        methods: {
+          addMySpeak: function(mySpeak, event){
+            if(mySpeak){
+              var p = document.createElement('p');
+              p.innerHTML = mySpeak;
+              document.body.appendChild(p);
+              vm.mySpeak = '';
+            }else{
+              return
+            }
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

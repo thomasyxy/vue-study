@@ -3,83 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>列表渲染</title>
-    <style media="screen">
-      .nav{
-        width: 1000px;
-        height: 30px;
-        margin: 0;
-        padding: 0;
-        margin: 0 auto;
-      }
-      .nav-list{
-        width: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      .item{
-        position: relative;
-        float: left;
-        width: 100px;
-        height: 30px;
-        list-style-type: none;
-        text-align: center;
-        line-height: 30px;
-        cursor: pointer;
-      }
-      .nav-list:after{
-        content: "";
-        display: table;
-        clear: both;
-      }
-      .item:hover{
-        color: #999;
-      }
-      .sub-list{
-        position: absolute;
-        left: 0;
-        top: 40px;
-        width: 100px;
-        margin: 0;
-        padding: 0;
-      }
-      .sub-item{
-        float: left;
-        width: 100px;
-        height: 30px;
-        margin: 5px;
-        list-style-type: none;
-        color: #000;
-      }
-      .sub-item:hover{
-        color: #999;
-      }
-      #side-nav{
-        position: fixed;
-        left:0;
-        top:10px;
-      }
-      #side-nav li{
-        width:50px;
-        height:30px;
-        font:bold 20px/30px simhei;
-        text-align: center;
-        list-style-type: none;
-        background:#333;
-        color:#fff;
-        margin:10px 0;
-        cursor: pointer;
-      }
-      #container li{
-        width:50%;
-        height:300px;
-        text-align: center;
-        font:bold 100px/300px simhei;
-        list-style-type: none;
-        background:yellow;
-        color:blue;
-        margin:50px 200px;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
   </head>
   <body>
 
@@ -99,7 +23,6 @@
       </ul>
 
       <ul id="side-nav">
-        <!-- 此处该用时间委托处理，只是为了学习vue.js才给所有 li 绑定了一个事件 -->
         <li v-for="n in num" data-to="go{{n}}" @click="clickHandleContent">{{ n }}</li>
       </ul>
       <ul id="container">
