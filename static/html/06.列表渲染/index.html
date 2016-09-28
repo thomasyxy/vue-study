@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>列表渲染</title>
+    <style media="screen">
+      .nav{
+        width: 1000px;
+        height: 30px;
+        margin: 0;
+        padding: 0;
+        margin: 0 auto;
+      }
+      .nav-list{
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .item{
+        position: relative;
+        float: left;
+        width: 100px;
+        height: 30px;
+        list-style-type: none;
+        text-align: center;
+        line-height: 30px;
+        cursor: pointer;
+      }
+      .nav-list:after{
+        content: "";
+        display: table;
+        clear: both;
+      }
+      .item:hover{
+        color: #999;
+      }
+      .sub-list{
+        position: absolute;
+        left: 0;
+        top: 40px;
+        width: 100px;
+        margin: 0;
+        padding: 0;
+      }
+      .sub-item{
+        float: left;
+        width: 100px;
+        height: 30px;
+        margin: 5px;
+        list-style-type: none;
+        color: #000;
+      }
+      .sub-item:hover{
+        color: #999;
+      }
+      #side-nav{
+        position: fixed;
+        left:0;
+        top:10px;
+      }
+      #side-nav li{
+        width:50px;
+        height:30px;
+        font:bold 20px/30px simhei;
+        text-align: center;
+        list-style-type: none;
+        background:#333;
+        color:#fff;
+        margin:10px 0;
+        cursor: pointer;
+      }
+      #container li{
+        width:50%;
+        height:300px;
+        text-align: center;
+        font:bold 100px/300px simhei;
+        list-style-type: none;
+        background:yellow;
+        color:blue;
+        margin:50px 200px;
+      }
+    </style>
+  </head>
+  <body>
+
+
+    <div id="app" class="nav">
+      <ul class="nav-list">
+        <template v-for="item in mainList">
+          <li class="item" data-idx="{{ $index }}" @click="showSubList">
+            {{ item.title }}
+            <ul class="sub-list" v-if="item.subList" v-show="item.isShow">
+              <li v-for="(key, subItem) in item.subList" class="sub-item sub-item{{ $index }}">
+                {{ subItem }}
+              </li>
+            </ul>
+          </li>
+        </template>
+      </ul>
+
+      <ul id="side-nav">
+        <!-- 此处该用时间委托处理，只是为了学习vue.js才给所有 li 绑定了一个事件 -->
+        <li v-for="n in num" data-to="go{{n}}" @click="clickHandleContent">{{ n }}</li>
+      </ul>
+      <ul id="container">
+        <li v-for="n in num" id="go{{n}}">{{ n }}</li>
+      </ul>
+
+    </div>
+
+
+    <script src="../../lib/vue.js"></script>
+    <script type="text/javascript">
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          num: 20,
+          showIdx: null,
+          topPos: null,
+          mainList: [
+            { title: "首页" },
+            {
+              title: "游戏",
+              subList: {
+                firstTitle: "斗地主",
+                secondTitle: "连连看",
+                lastTitle: "植物大战僵尸"
+              },
+              isShow: false
+            },
+            {
+              title: "音乐",
+              subList: {
+                firstTitle: "流行",
+                secondTitle: "交响乐",
+                lastTitle: "乡村音乐"
+              },
+              isShow: false
+            },
+            {
+              title: "体育",
+              subList: {
+                firstTitle: "足球",
+                secondTitle: "篮球",
+                lastTitle: "乒乓球"
+              },
+              isShow: false
+            },
+            {
+              title: "影视",
+              subList: {
+                firstTitle: "恐怖",
+                secondTitle: "喜剧",
+                lastTitle: "爱情"
+              },
+              isShow: false
+            }
+          ],
+          obj: {
+            FirstName: 'Yi',
+            LastName: 'Xuan',
+            Age: 30
+          }
+        },
+        methods: {
+          showSubList: function(e){
+            this.showIdx && this.clearPreShow();
+            this.showIdx = e.currentTarget.dataset.idx;
+            this.mainList[this.showIdx].isShow = true;
+          },
+          clearPreShow: function(){
+            this.mainList[this.showIdx].isShow = false;
+          },
+          clickHandleContent: function(e){
+            var curContent = document.getElementById(e.currentTarget.dataset.to);
+            this.topPos = curContent.offsetTop;
+            this.scrollTo(document.body, this.topPos, 100);
+          },
+          scrollTo: function(element, to, duration){
+            if(duration <= 0){
+              return;
+            }
+            var difference = to - element.scrollTop;
+            var perTick = difference / duration;
+
+            setTimeout(function(){
+              element.scrollTop = element.scrollTop + perTick;
+              if(element.scrollTop === to){
+                return;
+              }
+              scrollTo(element, to, duration - 10);
+            }, 10);
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
