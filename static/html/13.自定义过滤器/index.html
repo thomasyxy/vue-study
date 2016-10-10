@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>自定义过滤器</title>
+  </head>
+  <body>
+    <div id="app">
+      <input v-model='message | currencyDisplay'/>
+      <span >Model value: {{message}}</span>
+    </div>
+    <script src="../../lib/vue.js"></script>
+    <script type="text/javascript">
+      Vue.filter('currencyDisplay', {
+        read: function(val){
+          return '$' + val.toFixed(2);
+        },
+        write: function(val){
+          var number = +val.replace(/[^\d.]/g, '');
+          return isNaN(number) ? 0 : parseFloat(number.toFixed(2));
+        }
+      })
+      var app = new Vue({
+        el: '#app',
+        data: {
+          message: 1233.12
+        }
+      });
+    </script>
+  </body>
+</html>
