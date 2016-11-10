@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>vue 实例</title>
+  </head>
+  <body>
+    <div id="app">
+    </div>
+
+
+
+    <script src="../../lib/vue2.js"></script>
+    <script type="text/javascript">
+      var data = {
+        a: 1
+      }
+      var vm = new Vue({
+        data: data
+      })
+
+      vm.a === data.a
+
+      vm.a = 2
+      data.a
+    </script>
+  </body>
+</html>

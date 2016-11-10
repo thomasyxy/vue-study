@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>vue-router</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>hello</h1>
+      <p>
+        <router-link to="/foo">Go to Foo</router-link>
+        <router-link to="/bar">Go to Bar</router-link>
+      </p>
+      <router-view></router-view>
+    </div>
+    <script src="../../lib/vue.js"></script>
+    <script src="../../lib/vue-router.js"></script>
+    <script type="text/javascript">
+      var Foo = {
+        template: '<div>foo</div>'
+      }
+      var Bar = {
+        template: '<div>bar</div>'
+      }
+      var routes = [
+        {
+          path: '/foo',
+          component: Foo
+        },
+        {
+          path: '/bar',
+          component: Bar
+        }
+      ]
+
+      var router = new VueRouter({
+        routes
+      })
+
+      var app = new Vue({
+        el: '#app',
+        router
+      })
+    </script>
+  </body>
+</html>
